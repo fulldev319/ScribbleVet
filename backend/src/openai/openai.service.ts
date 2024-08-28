@@ -1,25 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 
 @Injectable()
-export class OpenaiService {
-  private openai: OpenAIApi;
+export class OpenAiService {
+  private openai: OpenAI;
 
   constructor() {
-    const configuration = new Configuration({
+    this.openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    this.openai = new OpenAIApi(configuration);
   }
 
-  async generateQuiz(document: string): Promise<string[]> {
-    const response = await this.openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: `Generate 5 yes/no questions based on the following document:\n\n${document}`,
-      max_tokens: 150,
-      temperature: 0.5,
-    });
+  async generateQuestions(document: string): Promise<string[]> {
+    const prompt = `Generate 5 yes/no questions based on the following text:\n\n${document}`;
 
-    return response.data.choices[0].text.trim().split('\n').filter(Boolean);
+    try {
+      const response = await this.openai.completions.create({
+        model: 'text-davinci-003', // Adjust the model as needed
+        prompt,
+        max_tokens: 150,
+        temperature: 0.7,
+      });
+
+      // Parse the response into questions
+      const questions = response.choices[0].text
+        .split('\n')
+        .filter((q) => q.trim() !== '');
+
+      return questions.slice(0, 5); // Ensure only 5 questions are returned
+    } catch (error) {
+      console.error('Error generating questions:', error);
+      throw new Error('Failed to generate questions.');
+    }
   }
 }
