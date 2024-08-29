@@ -22,8 +22,6 @@ export class OpenAiService {
         temperature: 0.7,
       });
 
-      console.log('response:', response);
-
       // Parse the response into questions
       const questions = response.choices[0].text
         .split('\n')

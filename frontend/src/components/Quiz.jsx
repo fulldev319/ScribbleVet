@@ -15,7 +15,6 @@ const Quiz = ({ questions, onSubmit }) => {
       return;
     }
 
-    // Correct scoring logic assuming correct answers are provided as "(Yes)" or "(No)" in the question text.
     const correctAnswers = questions.map((q) => (q.includes('(Yes)') ? 'yes' : 'no'));
     const score = answers.filter((answer, index) => answer === correctAnswers[index]).length;
 
@@ -26,7 +25,7 @@ const Quiz = ({ questions, onSubmit }) => {
     <div className="p-4">
       {questions.map((question, index) => (
         <div key={index} className="my-4">
-          <p className="text-lg mb-2">{question}</p>
+          <p className="text-lg mb-2">{question.split(' (')[0]}</p>
           <div className="flex space-x-2">
             <button
               onClick={() => handleAnswer(index, 'yes')}
