@@ -16,7 +16,7 @@ export class OpenAiService {
 
     try {
       const response = await this.openai.completions.create({
-        model: 'text-davinci-003', // Adjust the model as needed
+        model: 'gpt-3.5-turbo-instruct',
         prompt,
         max_tokens: 150,
         temperature: 0.7,
