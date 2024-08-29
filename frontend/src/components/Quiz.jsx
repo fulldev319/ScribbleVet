@@ -14,7 +14,11 @@ const Quiz = ({ questions, onSubmit }) => {
       alert('Please answer all questions.');
       return;
     }
-    const score = answers.filter((answer) => answer === 'yes').length; // Example scoring logic
+
+    // Correct scoring logic assuming correct answers are provided as "(Yes)" or "(No)" in the question text.
+    const correctAnswers = questions.map((q) => (q.includes('(Yes)') ? 'yes' : 'no'));
+    const score = answers.filter((answer, index) => answer === correctAnswers[index]).length;
+
     onSubmit(score);
   };
 

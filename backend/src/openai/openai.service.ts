@@ -12,7 +12,7 @@ export class OpenAiService {
   }
 
   async generateQuestions(document: string): Promise<string[]> {
-    const prompt = `Generate 5 yes/no questions based on the following text:\n\n${document}`;
+    const prompt = `Generate 5 yes/no questions based on the following text, along with the correct answers (yes/no):\n\n${document}`;
 
     try {
       const response = await this.openai.completions.create({
@@ -21,6 +21,8 @@ export class OpenAiService {
         max_tokens: 150,
         temperature: 0.7,
       });
+
+      console.log('response:', response);
 
       // Parse the response into questions
       const questions = response.choices[0].text
