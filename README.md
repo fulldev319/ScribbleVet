@@ -28,16 +28,40 @@ This is a web application that generates quizzes based on text documents using O
 2. **Install Dependencies**:
 
    - For the backend: Install the required dependencies by navigating to the backend directory.
+
+   ```bash
+   cd backend
+   npm install
+   ```
+
    - For the frontend: Install the required dependencies by navigating to the frontend directory.
+
+   ```bash
+   cd frontend
+   npm install
+   ```
 
 3. **Configure Environment Variables**:
 
    Create a `.env` file in the backend directory and set the `OPENAI_API_KEY` with your OpenAI API key.
 
+   ```bash
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
 4. **Running the Application**:
 
    - Start the backend server from the backend directory.
+
+   ```bash
+   npm run start
+   ```
+
    - Start the frontend application from the frontend directory.
+
+   ```bash
+   npm run start
+   ```
 
 5. **Access the Application**:
 
@@ -45,7 +69,6 @@ This is a web application that generates quizzes based on text documents using O
 
 ## Future Improvements
 
-- Implement more sophisticated scoring logic to provide detailed feedback.
 - Add user authentication and the ability to save and review past quiz results.
 - Improve the user interface and user experience with additional design features and feedback messages.
 - Expand support for larger and more complex documents.
